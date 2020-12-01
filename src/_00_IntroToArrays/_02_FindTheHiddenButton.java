@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 public class _02_FindTheHiddenButton implements ActionListener{
 	JFrame window;
 	JPanel panel;
-	
+	JButton[] buttons;
+	int hiddenButton;
 	//1. create an array of JButtons. Don't initialize it yet.
 	
 	//2 create an integer variable called hiddenButton
@@ -27,7 +28,18 @@ public class _02_FindTheHiddenButton implements ActionListener{
 		window = new JFrame("Find the Button");
 		panel = new JPanel();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		int num = Integer.parseInt(JOptionPane.showInputDialog("How many JButtons do you want?"));
 		
+		buttons = new JButton[num];
+		
+		for(int i = 0; i<buttons.length; i++) {
+			buttons[i] = new JButton();
+			buttons[i].addActionListener(this);
+			panel.add(buttons[i]);
+		}
+		window.add(panel);
+		window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		window.setVisible(true);
 		//3.  Ask the user to enter a positive number and convert it to an int
 		
 		//4. Initialize the array of JButtons to be the size of the int created in step 3
