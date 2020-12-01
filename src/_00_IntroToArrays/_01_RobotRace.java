@@ -7,6 +7,9 @@ import javax.swing.JOptionPane;
 import org.jointheleague.graphical.robot.Robot;
 
 public class _01_RobotRace {
+	public static void main(String[] args) {
+		raceCircle(3);
+	}
 	//1. make a main method
 	
 		//2. create an array of 5 robots.
@@ -25,6 +28,67 @@ public class _01_RobotRace {
 		//8. try different races with different amounts of robots.
     	
 	    //9. make the robots race around a circular track.
-
+	static Random rand = new Random();
+	static void raceStraight(int numbots) {
+		Robot[] robots = new Robot[numbots];
+		for(int i = 0; i<robots.length; i++) {
+			robots[i] = new Robot();
+			robots[i].moveTo(60 + (100*i), 850);
+			robots[i].setSpeed(10);
+		}
+		Robot.setWindowSize((30+100*numbots), 900);
+		Robot.setWindowColor(150, 120, 250);
+		
+		boolean winner = false;
+		do {
+			for(int i = 0; i<robots.length; i++) {
+				robots[i].move(rand.nextInt(51)+1);
+				if(robots[i].getY()<=0) {
+					winner = true;
+				}
+			}
+		}while(winner==false);
+		
+		for(int i = 0; i<robots.length; i++) {
+			if(robots[i].getY()<=0) {
+				System.out.println("Robot Number " + i + " is the winner! It gets a party!!!!");
+			}
+		}
+	}
 	
+	static void raceCircle(int numbots) {
+		Robot[] robots = new Robot[numbots];
+		int[] degrees = new int[numbots];
+		for(int i = 0; i<robots.length; i++) {
+			degrees[i] = 0;
+			robots[i] = new Robot();
+			robots[i].moveTo(100, 450);
+			robots[i].setSpeed(10);
+			robots[i].miniaturize();
+			robots[i].penDown();
+		}
+		Robot.setWindowSize(900, 880);
+		Robot.setWindowColor(150, 120, 250);
+		
+		boolean winner = false;
+		do {
+			for(int i = 0; i<robots.length; i++) {
+				int r = rand.nextInt(40)+10;
+				for(int z = 0; z<r; z++) {
+					robots[i].turn(1);
+					robots[i].move(5);
+					degrees[i]++;
+				}
+				if(degrees[i]>=360) {
+					winner = true;
+				}
+			}
+		}while(winner==false);
+		
+		for(int i = 0; i<robots.length; i++) {
+			if(degrees[i]>=360) {
+				System.out.println("Robot Number " + i + " is the winner! It gets a party!!!!");
+			}
+		}
+	}
 }
