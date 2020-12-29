@@ -60,22 +60,19 @@ public class MoreArrayFun {
 	
 	void printStringsRandom(String[] arr) {
 		Random r = new Random();
-		int[] rand = new int[arr.length];
-		for(int i = 0; i<rand.length; i++) {
-			rand[i] = i;
-		}
-		for(int i = 0; i<rand.length; i++) {
-			int a;
-			int b;
-			int x = r.nextInt(rand.length);
-			int y = r.nextInt(rand.length);
-			a = rand[x];
-			b = rand[y];
-			rand[y] = a;
-			rand[x] = b;
+		
+		for(int i = 0; i<arr.length; i++) {
+			String a;
+			String b;
+			int x = r.nextInt(arr.length);
+			int y = r.nextInt(arr.length);
+			a = arr[x];
+			b = arr[y];
+			arr[y] = a;
+			arr[x] = b;
 		}
 		for(int i = 0; i<arr.length; i++) {
-			System.out.println(arr[rand[i]]);
+			System.out.println(arr[i]);
 		}
 	}
 }
